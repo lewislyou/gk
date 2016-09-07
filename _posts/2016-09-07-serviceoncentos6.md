@@ -7,16 +7,19 @@ title: Centos6 service
      vi scriptFileName.conf
 
 And add this content
+
      start on stopped rc RUNLEVEL=[12345]
      stop on runlevel [!12345]
      respawn
      exec /you/respawned/script.sh -your -parameters
 
 Save file and then launch this command (without .conf of file)
+
      start scriptFileName
 
 for example service zebra
 /etc/init/zebra.conf
+
      start on stopped [12345]
      stop on runlevel [!12345]
      post-stop script
