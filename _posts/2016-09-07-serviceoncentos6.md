@@ -33,6 +33,7 @@ for example service zebra
 
     start zebra
 
+<http://serverfault.com/questions/640788/how-to-respawn-a-script-in-rhel-centos6-when-etc-inittab-has-been-deprecated>
 
 otherwise use supervisord
 
