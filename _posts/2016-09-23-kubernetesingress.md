@@ -46,7 +46,6 @@ name: test-ingress
 spec:
 backend:
 serviceName: testsvc
-
     servicePort: 80
 ```
 
@@ -122,6 +121,7 @@ COPY lua /etc/nginx/lua/
 WORKDIR /
 
 CMD ["/nginx-ingress-controller"]
+
 ```
 编译nginx-ingress-controller镜像
 
