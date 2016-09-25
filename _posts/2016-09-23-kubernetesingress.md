@@ -197,6 +197,7 @@ args:
 使用命令kubectl -f ingress.yaml/nginx-ingress-controller.yaml把Ingress和Ingress控制器发布到kubernetes集群中。
 
 下图展示了从浏览器经过Ingress控制器到ingress再到service再到pod的全过程：
+
 ![ee](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721162358.jpg?raw=true)
 
 <http://www.dockerinfo.net/1132.html>
