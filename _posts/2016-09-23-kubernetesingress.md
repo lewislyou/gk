@@ -89,6 +89,8 @@ servicePort: 80
 3. 创建Ingress控制器：
 
 **编写Dockerfile**
+
+
 ```
 # Copyright 2015 The Kubernetes Authors. All rights reserved.
 #
