@@ -1,19 +1,18 @@
-
 ---
 title: kubernetes 1.2 ingress
 ---
 
-![aa](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161028.jpg)
+![aa](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161028.jpg?raw=true)
 
   什么是Ingress
 
   在Kubernetes中，Service和Pod的IP地址只能在集群内部网络中路由，所有到达“边界路由器”（Edge Router）的网络流量要么被丢弃，要么被转发到别处，从概念上讲，它类似下图：
 
-![bb](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161036.jpg)
+![bb](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161036.jpg?raw=true)
 
   Ingress是对外（公网）服务到集群内的Service之间规则的集合：允许进入集群的请求被转发至集群内的Service，过程类似下图：
 
-![cc](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161042.jpg)
+![cc](https://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721161042.jpg?raw=true)
 
 Ingress能把Service（Kubernetes的服务）配置成外网能够访问的URL，流量负载均衡，终止SSL，提供于域名访问的虚拟主机等，用户通过访问URL（API资源服务的形式，例如：caas.one/kibana）进入和请求Service，一个Ingress控制器负责处理所有Ingress的请求流量，它通常是一个负载均衡器，它也可以设置在边界路由器上，或者由额外的前端来帮助处理HA方式的流量。
 
@@ -198,7 +197,7 @@ args:
 使用命令kubectl -f ingress.yaml/nginx-ingress-controller.yaml把Ingress和Ingress控制器发布到kubernetes集群中。
 
 下图展示了从浏览器经过Ingress控制器到ingress再到service再到pod的全过程：
-![ee](://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721162358.jpg)
+![ee](://github.com/lewislyou/gk/blob/gh-pages/_picture/20160721162358.jpg?raw=true)
 
 <http://www.dockerinfo.net/1132.html>
 
