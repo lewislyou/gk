@@ -22,14 +22,16 @@ Ingress能把Service（Kubernetes的服务）配置成外网能够访问的URL�
 
 我们需要一个Ingress控制器，这里我们使用nginx1.9.1作为ingress控制器，来将我们的Service暴露在公网上，整个过程的原理如下：
 
-Ingress是一种对象（资源）存在于API Server(ETCD)上，它的整个生命周期（创建、更新、销毁）可以被实时的监听
-编写一个golang程序来监听/ingresses的变化
-我们采用nginx和golang程序来实现对Ingress控制
-使用Nginx做负载均衡和请求路由，nginx的配置文件由Golang的模板来编写
-/ingresses变化后，golang程序修改nginx的配置文件，reload这个nginx服务
+* Ingress是一种对象（资源）存在于API Server(ETCD)上，它的整个生命周期（创建、更新、销毁）可以被实时的监听
+* 编写一个golang程序来监听/ingresses的变化
+* 我们采用nginx和golang程序来实现对Ingress控制
+* 使用Nginx做负载均衡和请求路由，nginx的配置文件由Golang的模板来编写
+* /ingresses变化后，golang程序修改nginx的配置文件，reload这个nginx服务
+
+
 我们将Ingress控制器（nginx-ingress-controller）作为kubernetes的pod部署在kubernetes集群中，这里我们将使用kubernetes1.2版本的新特性（DaemonSet），将nginx-ingress-controller作为Only-One-Pod-Per-Node的应用发布，然后将nginx-ingress-controller服务使用NodePort的方式暴露在外网，最后，在DNS上设置将域名指向这些主机。
 
-使用Ingress
+**使用Ingress**
 
 编写一个简单的ingress，它类似：
 
@@ -76,15 +78,17 @@ servicePort: 80
 
 我们现有的集群中有部署了efk（elasticsearch + fluentd + kibana）技术栈，现在我们想把elastic search和kibana两个服务暴露在公网上，方便我们的合作商来访问，我们要达到的目的：
 
-我们有两个域名，分别是：caas.one和jingru.io
-caas.one用来暴露kibana服务，jingru.io用来暴露es服务
-我们希望合作商能够通过caas.one/kibana来访问我们的内部的kibana服务
-我们希望合作商能够通过jingru.io/es来访问我们的内部的es服务
-为了达到我们的目标，我们将逐步建立我们ingress设施：
+* 我们有两个域名，分别是：caas.one和jingru.io
+* caas.one用来暴露kibana服务，jingru.io用来暴露es服务
+* 我们希望合作商能够通过caas.one/kibana来访问我们的内部的kibana服务
+* 我们希望合作商能够通过jingru.io/es来访问我们的内部的es服务
+* 为了达到我们的目标，我们将逐步建立我们ingress设施：
 
-编写glang程序（https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/nginx），并构建出二进制文件：nginx-ingress-controller。
-编写nginx.tmplhttps://github.com/lth2015/kubernetes-examples/blob/master/ingress/docker/nginx.tmpl
-创建Ingress控制器：
+1. 编写glang程序（https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/nginx），并构建出二进制文件：nginx-ingress-controller。
+2. 编写nginx.tmplhttps://github.com/lth2015/kubernetes-examples/blob/master/ingress/docker/nginx.tmpl
+3. 创建Ingress控制器：
+
+**编写Dockerfile**
 ```
 # Copyright 2015 The Kubernetes Authors. All rights reserved.
 #
@@ -121,7 +125,7 @@ CMD ["/nginx-ingress-controller"]
 
 docker build -t nginx-ingress-controller:0.5 .
 
-编写Dockerfile
+**编写Ingress.yaml**
 
 ```
 # An Ingress with 2 hosts and 3 endpoints
